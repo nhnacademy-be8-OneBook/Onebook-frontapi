@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="zxx">
 <head>
     <!-- Meta Tag -->
     <meta charset="utf-8">
@@ -11,8 +12,10 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/images/favicon.png">
     <!-- Web Font -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+    <!-- StyleSheet -->
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/css/bootstrap.css">
     <!-- Magnific Popup -->
@@ -23,6 +26,8 @@
     <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
     <!-- Themify Icons -->
     <link rel="stylesheet" href="/css/themify-icons.css">
+    <!-- Jquery Ui -->
+    <link rel="stylesheet" href="/css/jquery-ui.css">
     <!-- Nice Select CSS -->
     <link rel="stylesheet" href="/css/niceselect.css">
     <!-- Animate CSS -->
@@ -112,7 +117,7 @@
                             <li><i class="ti-location-pin"></i> Store location</li>
                             <li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
                             <li><i class="ti-user"></i> <a href="#">My account</a></li>
-                            <li><i class="ti-power-off"></i><a href="../auth/login.html#">Login</a></li>
+                            <li><i class="ti-power-off"></i><a href="login.html">Login</a></li>
                         </ul>
                     </div>
                     <!-- End Top Right -->
@@ -127,7 +132,7 @@
                 <div class="col-lg-2 col-md-2 col-12">
                     <!-- Logo -->
                     <div class="logo">
-                        <a href="index.html"><img src="/images/logo.png" alt="logo"></a>
+                        <a href="/"><img src="/images/logo.png" alt="logo"></a>
                     </div>
                     <!--/ End Logo -->
                     <!-- Search Form -->
@@ -171,39 +176,7 @@
                             <a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
                         </div>
                         <div class="sinlge-bar shopping">
-                            <a href="#" class="single-icon"><i class="ti-bag"></i> <span
-                                    class="total-count">2</span></a>
-                            <!-- Shopping Item -->
-                            <div class="shopping-item">
-                                <div class="dropdown-cart-header">
-                                    <span>2 Items</span>
-                                    <a href="#">View Cart</a>
-                                </div>
-                                <ul class="shopping-list">
-                                    <li>
-                                        <a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-                                        <a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70"
-                                                                          alt="#"></a>
-                                        <h4><a href="#">Woman Ring</a></h4>
-                                        <p class="quantity">1x - <span class="amount">$99.00</span></p>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-                                        <a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70"
-                                                                          alt="#"></a>
-                                        <h4><a href="#">Woman Necklace</a></h4>
-                                        <p class="quantity">1x - <span class="amount">$35.00</span></p>
-                                    </li>
-                                </ul>
-                                <div class="bottom">
-                                    <div class="total">
-                                        <span>Total</span>
-                                        <span class="total-amount">$134.00</span>
-                                    </div>
-                                    <a href="checkout.html" class="btn animate">Checkout</a>
-                                </div>
-                            </div>
-                            <!--/ End Shopping Item -->
+                            <a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">2</span></a>
                         </div>
                     </div>
                 </div>
@@ -232,8 +205,7 @@
                                             </li>
                                             <li><a href="#">Product</a></li>
                                             <li><a href="#">Service</a></li>
-                                            <li><a href="#">Shop<i class="ti-angle-down"></i><span
-                                                    class="new">New</span></a>
+                                            <li><a href="#">Shop<i class="ti-angle-down"></i><span class="new">New</span></a>
                                                 <ul class="dropdown">
                                                     <li><a href="shop-grid.html">Shop Grid</a></li>
                                                     <li><a href="shop-list.html">Shop List</a></li>
@@ -245,8 +217,8 @@
                                             <li><a href="#">Pages<i class="ti-angle-down"></i></a>
                                                 <ul class="dropdown">
                                                     <li><a href="about-us.html">About Us</a></li>
-                                                    <li><a href="../auth/login.html">Login</a></li>
-                                                    <li><a href="joinForm.html">Register</a></li>
+                                                    <li><a href="login.html">Login</a></li>
+                                                    <li><a href="register.html">Register</a></li>
                                                     <li><a href="mail-success.html">Mail Success</a></li>
                                                     <li><a href="404.html">404</a></li>
                                                 </ul>
@@ -283,7 +255,7 @@
                 <div class="bread-inner">
                     <ul class="bread-list">
                         <li><a href="index1.html">Home<i class="ti-arrow-right"></i></a></li>
-                        <li class="active"><a href="blog-single.html">Register</a></li>
+                        <li class="active"><a href="blog-single.html">Shop Grid</a></li>
                     </ul>
                 </div>
             </div>
@@ -292,242 +264,122 @@
 </div>
 <!-- End Breadcrumbs -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>포인트 정책 관리</title>
-    <style>
-        /* 전역 box-sizing 설정 */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* 탭 스타일 */
-        .tabs {
-            display: flex;
-            border-bottom: 2px solid #ccc;
-        }
-
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            border: 1px solid #ccc;
-            border-bottom: none;
-            margin-right: 10px;
-            background-color: #f9f9f9;
-            transition: background-color 0.3s;
-        }
-
-        .tab:hover {
-            background-color: #ddd;
-        }
-
-        .tab.active {
-            background-color: #007bff;
-            color: white;
-        }
-
-        /* 탭 콘텐츠 스타일 */
-        .tab-content {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            overflow: auto;
-            width: 80vw;   /* 화면 크기에 따라 너비를 설정 */
-            height: 50vh;  /* 화면 크기에 따라 높이를 설정 */
-            background-color: #f4f4f4;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .alert {
-            padding: 10px;
-            margin-top: 20px;
-            border: 1px solid transparent;
-            border-radius: 5px;
-            display: none;
-        }
-
-        .alert.success {
-            background-color: #d4edda;
-            color: #155724;
-        }
-
-        .alert.danger {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-
-        /* 기본 폼 스타일 */
-        .form-control {
-            margin-bottom: 10px;
-            padding: 8px;
-            width: 100%;
-        }
-
-        .btn {
-            padding: 10px 15px;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-        }
-
-        .btn-warning {
-            background-color: #ffc107;
-        }
-
-        /* 여백 추가 */
-        .header-spacing {
-            margin-top: 50px; /* 포인트 정책 관리 글씨와 상단의 간격 */
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        .form-group input {
-            width: 30%;
-        }
-
-        .form-group .checkbox-group {
-            display: flex;
-            align-items: center;
-        }
-
-        .checkbox-group input {
-            margin-right: 10px;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <!-- 상단 제목 -->
-    <h1 class="header-spacing">포인트 정책 관리</h1>
-
-    <!-- 탭 -->
-    <div class="tabs" id="policyTabs">
-        <div class="tab active" data-tab="create">포인트 정책 등록</div>
-        <div class="tab" data-tab="update">포인트 정책 수정</div>
-    </div>
-
-    <!-- 탭 콘텐츠 -->
-    <div class="tab-content" id="create">
-        <div class="card">
-            <div class="card-header">포인트 정책 등록</div>
-            <div class="card-body">
-                <form id="createPointPolicyForm">
-                    <input type="text" class="form-control" id="pointPolicyName" placeholder="포인트 정책명" required>
-                    <input type="number" class="form-control" id="pointPolicyRate" placeholder="포인트 비율" required>
-                    <input type="number" class="form-control" id="pointPolicyConditionAmount" placeholder="포인트 조건 금액" required>
-                    <input type="number" class="form-control" id="pointPolicyApplyAmount" placeholder="적용 포인트 금액" required>
-                    <input type="text" class="form-control" id="pointPolicyCondition" placeholder="포인트 조건" required>
-                    <button type="submit" class="btn btn-primary">등록</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- 포인트 정책 수정 탭 -->
-    <div class="tab-content" id="update">
-        <div class="card">
-            <div class="card-header">포인트 정책 수정</div>
-            <div class="card-body">
-                <form id="updatePointPolicyForm">
-                    <input type="number" class="form-control" id="updatePointPolicyId" placeholder="포인트 정책 ID" required>
-                    <input type="text" class="form-control" id="updatePointPolicyName" placeholder="포인트 정책명" required>
-                    <input type="number" class="form-control" id="updatePointPolicyRate" placeholder="포인트 비율" required>
-
-                    <!-- 활성화 / 비활성화 체크박스 -->
-                    <div class="form-group checkbox-group">
-                        <label for="activePolicy">활성화</label>
-                        <input type="radio" id="activePolicy" name="policyStatus" value="active" checked>
-                        <label for="inactivePolicy">비활성화</label>
-                        <input type="radio" id="inactivePolicy" name="policyStatus" value="inactive">
+<!--	마이페이지 사이드바 시작-->
+<!-- Product Style -->
+<section class="product-area shop-sidebar shop section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-12">
+                <div class="shop-sidebar">
+                    <!-- Single Widget -->
+                    <div class="single-widget category" style="border-radius: 10px">
+                        <a href="/my/home" class="title-line" style="text-align: center">
+                            <h4>마이 페이지</h4>
+                        </a>
+                        <br/>
+                        <br/>
+                        <h3 class="title">쇼핑 정보</h3>
+                        <ul class="categor-list">
+                            <li><a href="/my/orders">주문 목록/배송 조회</a></li>
+                            <li><a href="#">취소/반품/교환 내역</a></li>
+                            <li><a href="#">찜한 상품</a></li>
+                        </ul>
+                        <br/>
+                        <br/>
+                        <h3 class="title">혜택 관리</h3>
+                        <ul class="categor-list">
+                            <li><a href="#">쿠폰</a></li>
+                            <li><a href="/my/point/point">포인트</a></li>
+                        </ul>
+                        <br/>
+                        <br/>
+                        <h3 class="title">리뷰</h3>
+                        <ul class="categor-list">
+                            <li><a href="/review/pending">작성 가능한 리뷰</a></li>
+                            <li><a href="/review/my-review">내가 작성한 리뷰</a></li>
+                        </ul>
+                        <br/>
+                        <br/>
+                        <h3 class="title">회원 정보</h3>
+                        <ul class="categor-list">
+                            <li><a href="/my/member/modify-validate">회원정보 수정</a></li>
+                            <li><a href="/my/member/grade">회원 등급</a></li>
+                            <li><a href="/addresses">주소 관리</a></li>
+                            <li><a href="/my/member/leave-validate">회원 탈퇴</a></li>
+                        </ul>
                     </div>
+                    <!--/ End Single Widget -->
+                </div>
+            </div>
+            <!--	마이페이지 사이드바 종료-->
 
-                    <button type="submit" class="btn btn-warning">수정</button>
-                </form>
+            <!-- 마이 페이지 본문 -->
+            <div class="col-lg-9 col-md-8 col-12">
+
+                <!-- Start myInfo Top -->
+                <div class="col-12 shop-top" style="padding: 0; border-radius: 10px;">
+                    <div style="padding-left:45px; padding-top:30px; padding-bottom:15px;">
+                        <table style="border-collapse: collapse; border: none; width: 100%;">
+                            <thead>
+                            <tr>
+                                <td colspan="3" style="border: none; padding-bottom: 25px">
+                                    <a href="/my/point/point" class="title-line" style="text-align: center">
+                                        <span>나의 포인트 내역</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            </thead>
+                        </table>
+                        <br />
+                        <br />
+                        <br />
+
+                        <!-- My Point History Section -->
+                        <section class="shop my-point section">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="point-history">
+                                            <h2>나의 포인트</h2>
+                                            <!-- Point History Table -->
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>포인트 ID</th>
+                                                    <th>포인트 값</th>
+                                                    <th>포인트 타입</th>
+                                                    <th>생성 일시</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <!-- Point History 데이터를 반복해서 출력 -->
+                                                <tr th:each="pointHistory : ${memberPointHistories.content}">
+                                                    <td th:text="${pointHistory.pointCurrent}"></td> <!-- 현재 포인트 -->
+                                                    <td th:text="${pointHistory.pointLogUpdatedType}"></td> <!-- 포인트 업데이트 타입 -->
+                                                    <td th:text="${pointHistory.pointLogAmount}"></td> <!-- 포인트 변화량 -->
+                                                    <td th:text="${#temporals.format(pointHistory.pointLogUpdatedAt, 'yyyy-MM-dd HH:mm:ss')}"></td> <!-- 포인트 업데이트 일시 -->
+                                                </tr>
+                                                <!-- 포인트 내역이 없을 경우 -->
+                                                <tr th:if="${#lists.isEmpty(memberPointHistories.content)}">
+                                                    <td colspan="4" style="text-align:center;">포인트 내역이 없습니다.</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- End My Point History Section -->
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</section>
+<!--/ End Product Area -->
 
-    <!-- 알림 메시지 -->
-    <div id="alertMessage" class="alert mt-3"></div>
-</div>
-
-<script>
-    // 탭 기능
-    document.querySelectorAll('.tab').forEach(tab => {
-        tab.addEventListener('click', function (e) {
-            // 활성화된 탭 제거
-            document.querySelector('.tab.active').classList.remove('active');
-            // 클릭한 탭 활성화
-            this.classList.add('active');
-
-            // 모든 탭 내용 숨기기
-            document.querySelectorAll('.tab-content').forEach(pane => {
-                pane.classList.remove('active');
-            });
-
-            // 선택한 탭 내용 보이기
-            const targetTab = this.getAttribute('data-tab');
-            document.getElementById(targetTab).classList.add('active');
-        });
-    });
-
-    // 포인트 정책 등록 폼 제출
-    document.getElementById('createPointPolicyForm').addEventListener('submit', async function (e) {
-        e.preventDefault();
-
-        const data = {
-            pointPolicyName: document.getElementById('pointPolicyName').value,
-            pointPolicyRate: document.getElementById('pointPolicyRate').value,
-            pointPolicyConditionAmount: document.getElementById('pointPolicyConditionAmount').value,
-            pointPolicyApplyAmount: document.getElementById('pointPolicyApplyAmount').value,
-            pointPolicyCondition: document.getElementById('pointPolicyCondition').value,
-            pointPolicyApplyType: document.getElementById('pointPolicyApplyType').checked,
-        };
-
-        // API 호출 예시
-        try {
-            // const response = await axios.post('/api/endpoint', data);
-            showAlert('포인트 정책이 등록되었습니다.', 'success');
-            this.reset();
-        } catch (error) {
-            showAlert('등록 실패. 다시 시도해 주세요.', 'danger');
-        }
-    });
-
-    // 알림 메시지 표시 함수
-    function showAlert(message, type) {
-        const alertMessage = document.getElementById('alertMessage');
-        alertMessage.classList.add('alert-' + type);
-        alertMessage.textContent = message;
-        alertMessage.style.display = 'block';
-
-        setTimeout(() => {
-            alertMessage.style.display = 'none';
-            alertMessage.classList.remove('alert-' + type);
-        }, 3000);
-    }
-</script>
 
 <!-- Start Footer Area -->
 <footer class="footer">
@@ -622,6 +474,7 @@
 </footer>
 <!-- /End Footer Area -->
 
+
 <!-- Jquery -->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery-migrate-3.0.0.js"></script>
@@ -659,3 +512,4 @@
 <!-- Active JS -->
 <script src="/js/active.js"></script>
 </body>
+</html>

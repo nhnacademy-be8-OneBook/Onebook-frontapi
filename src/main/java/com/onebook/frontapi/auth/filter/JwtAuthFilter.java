@@ -25,7 +25,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-    private  final AuthFeignClient authFeignClient;
+    private final AuthFeignClient authFeignClient;
 
     // JWT 기반 인증: Authorization 쿠키에 있는 jwt 토큰 가져다가 검증함.
     @Override
@@ -34,24 +34,24 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         // 쿠키가 없으면 여기서 걸려서 홈페이지에 쿠키 없이 접근하면 login 페이지로 이동함.
         // -> 해결: 쿠키가 없으면 JWT 필터 태우지 않고, 그냥 넘김.
-        if(Objects.isNull(cookies) || Arrays.stream(cookies).noneMatch(e -> e.getName().equals("Authorization"))) {
+        if (Objects.isNull(cookies) || Arrays.stream(cookies).noneMatch(e -> e.getName().equals("Authorization"))) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        for(Cookie c : cookies) {
+        for (Cookie c : cookies) {
 
-            if(c.getName().equals("Authorization")) {
+            if (c.getName().equals("Authorization")) {
 
-               MemberInfoResponse memberInfoResponse = authFeignClient.getInfoByAuthorization("Bearer " + c.getValue());
+                MemberInfoResponse memberInfoResponse = authFeignClient.getInfoByAuthorization("Bearer " + c.getValue());
 
-               Authentication authentication = new UsernamePasswordAuthenticationToken(
-                       memberInfoResponse.loginId(),
-                       null,
-                       List.of(new SimpleGrantedAuthority("ROLE_" + memberInfoResponse.role()))
-               );
+                Authentication authentication = new UsernamePasswordAuthenticationToken(
+                        memberInfoResponse.loginId(),
+                        null,
+                        List.of(new SimpleGrantedAuthority("ROLE_" + memberInfoResponse.role()))
+                );
 
-               SecurityContextHolder.getContext().setAuthentication(authentication);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
 
             }
         }
@@ -59,7 +59,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
 
     }
-
+}
 //    public boolean isAuthorization(Cookie[] cookies) {
 //        for(Cookie c : cookies) {
 //            if(c.getName().equals("Authorization")) {
@@ -69,5 +69,3 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 //
 //        return true;
 //    }
-
-}

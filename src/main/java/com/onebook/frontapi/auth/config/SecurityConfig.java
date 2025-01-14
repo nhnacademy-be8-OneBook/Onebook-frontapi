@@ -36,62 +36,154 @@ import java.io.IOException;
 public class SecurityConfig {
 
     private final AuthFeignClient authFeignClient;
-    private final CustomAccessDeniedHandler customAccessDeniedHandler;
-    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     private final MemberClient memberClient;
     private final CartService cartService;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+
 
     @Bean
     public SecurityFilterChain devSecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
-
-//        http.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(
-//                SessionCreationPolicy.STATELESS));
-
-
         http.formLogin(formLogin ->
                 formLogin
                         .loginPage("/login") // 사용자 정의 로그인 페이지
                         .usernameParameter("id") // 사용자명 파라미터 이름
                         .passwordParameter("password") // 비밀번호 파라미터 이름
                         .loginProcessingUrl("/login/process") // 로그인 처리 URL
-                        .successHandler(new AuthSuccessHandler(authFeignClient, memberClient, cartService))// jwt token 추가하기
-                        .failureHandler(new AuthFailureHandler())
+                        .successHandler(new AuthSuccessHandler(authFeignClient, memberClient, cartService)) // 성공 핸들러 수정
+                        .failureHandler(new AuthFailureHandler()) // 실패 핸들러
                         .permitAll() // 로그인 페이지 접근 허용
         );
 
         http.authorizeHttpRequests(authRequest -> {
-            authRequest.requestMatchers("/", "/login", "/public/**",
+            authRequest
+                    .requestMatchers("/", "/login", "/public/**",
                             "/css/**", "/js/**", "/images/**", "/join", "/test/**",
-                            "/style.css", "/dormant-account/**", "/dooray-message-authentication",
-                            "/cart", "/book/**").permitAll()
-                    .requestMatchers("/admin/**").hasRole("ADMIN") // 로그인할 때 Authentication을 생성하는데 이때 ROLE을 넣어줬음. 그래서 이렇게 사용 가능.
-                    .anyRequest().authenticated();
+                            "/style.css", "/dormant-account/**", "/dooray-message-authentication", "/my/point/point") // 포인트 페이지 허용
+                    .permitAll() // 포인트 페이지에 로그인 없이 접근 가능
+                    .requestMatchers("/admin/**").hasRole("ADMIN")
+                    .anyRequest().authenticated(); // 나머지 페이지는 인증 필요
         });
 
         http.addFilterBefore(new JwtAuthFilter(authFeignClient), UsernamePasswordAuthenticationFilter.class);
 
-        // logout 시 쿠키 삭제하기
+        // 로그아웃 설정
         http.logout(logout -> {
-            logout.logoutUrl("/logout").
-                    deleteCookies("Authorization")
-                    .logoutSuccessUrl("/"); // 로그아웃 성공 핸들러 추가
+            logout.logoutUrl("/logout")
+                    .deleteCookies("Authorization") // Authorization 쿠키 삭제
+                    .logoutSuccessUrl("/"); // 로그아웃 후 리다이렉션 URL
         });
 
         http.exceptionHandling(exceptionHandling ->
                 exceptionHandling
                         .accessDeniedHandler(customAccessDeniedHandler)
-//                        .authenticationEntryPoint(customAuthenticationEntryPoint)
         );
 
         return http.build();
     }
 
-    // Password Encoder, InMemory is Dev
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(); // BCrypt 암호화 사용
-
     }
-
 }
+
+
+
+
+
+//package com.onebook.frontapi.auth.config;
+//
+//import com.onebook.frontapi.auth.filter.JwtAuthFilter;
+//import com.onebook.frontapi.auth.handler.AuthFailureHandler;
+//import com.onebook.frontapi.auth.handler.AuthSuccessHandler;
+//import com.onebook.frontapi.auth.handler.CustomAccessDeniedHandler;
+//import com.onebook.frontapi.auth.handler.CustomAuthenticationEntryPoint;
+//import com.onebook.frontapi.feign.auth.AuthFeignClient;
+//import com.onebook.frontapi.feign.member.MemberClient;
+//import com.onebook.frontapi.service.member.MemberService;
+//import jakarta.servlet.ServletException;
+//import jakarta.servlet.http.HttpServletRequest;
+//import jakarta.servlet.http.HttpServletResponse;
+//import lombok.RequiredArgsConstructor;
+//import lombok.extern.slf4j.Slf4j;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+//import org.springframework.security.config.http.SessionCreationPolicy;
+//import org.springframework.security.core.AuthenticationException;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.web.AuthenticationEntryPoint;
+//import org.springframework.security.web.SecurityFilterChain;
+//import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+//
+//import java.io.IOException;
+//
+//@Configuration
+//@EnableWebSecurity
+//@RequiredArgsConstructor
+//@Slf4j
+//public class SecurityConfig {
+//
+//    private final AuthFeignClient authFeignClient;
+//    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+//    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+//    private final MemberClient memberClient;
+//
+//    @Bean
+//    public SecurityFilterChain devSecurityFilterChain(HttpSecurity http) throws Exception {
+//        http.csrf(AbstractHttpConfigurer::disable);
+//
+////        http.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(
+////                SessionCreationPolicy.STATELESS));
+//
+//
+//        http.formLogin(formLogin ->
+//                formLogin
+//                        .loginPage("/login") // 사용자 정의 로그인 페이지
+//                        .usernameParameter("id") // 사용자명 파라미터 이름
+//                        .passwordParameter("password") // 비밀번호 파라미터 이름
+//                        .loginProcessingUrl("/login/process") // 로그인 처리 URL
+//                        .successHandler(new AuthSuccessHandler(authFeignClient, memberClient))// jwt token 추가하기
+//                        .failureHandler(new AuthFailureHandler())
+//                        .permitAll() // 로그인 페이지 접근 허용
+//        );
+//
+//        http.authorizeHttpRequests(authRequest -> {
+//            authRequest.requestMatchers("/", "/login", "/public/**",
+//                            "/css/**", "/js/**", "/images/**", "/join", "/test/**",
+//                            "/style.css", "/dormant-account/**", "/dooray-message-authentication").permitAll()
+//                    .requestMatchers("/admin/**").hasRole("ADMIN") // 로그인할 때 Authentication을 생성하는데 이때 ROLE을 넣어줬음. 그래서 이렇게 사용 가능.
+//                    .anyRequest().authenticated();
+//        });
+//
+//        http.addFilterBefore(new JwtAuthFilter(authFeignClient), UsernamePasswordAuthenticationFilter.class);
+//
+//        // logout 시 쿠키 삭제하기
+//        http.logout(logout -> {
+//            logout.logoutUrl("/logout").
+//                    deleteCookies("Authorization")
+//                    .logoutSuccessUrl("/"); // 로그아웃 성공 핸들러 추가
+//        });
+//
+//        http.exceptionHandling(exceptionHandling ->
+//                exceptionHandling
+//                        .accessDeniedHandler(customAccessDeniedHandler)
+////                        .authenticationEntryPoint(customAuthenticationEntryPoint)
+//        );
+//
+//        return http.build();
+//    }
+//
+//    // Password Encoder, InMemory is Dev
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder(); // BCrypt 암호화 사용
+//
+//    }
+//
+//}
