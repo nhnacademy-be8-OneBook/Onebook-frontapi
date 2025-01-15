@@ -219,4 +219,8 @@ public class CouponPolicyService {
     public RatePolicyForBookResponse deletePricePolicyForCategory(Long id){
         return couponPolicyClient.deletePricePolicyForCategory(id).getBody();
     }
+
+    public List<UsingPolicyResponse> getUsingPolicies(){
+        return couponPolicyClient.getUsingPolicies().getBody();
+    }
 }

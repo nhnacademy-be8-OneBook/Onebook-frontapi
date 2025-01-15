@@ -1,5 +1,6 @@
 package com.onebook.frontapi.service.coupon;
 
+import com.onebook.frontapi.dto.coupon.request.coupon.IssueCouponToMemberRequest;
 import com.onebook.frontapi.dto.coupon.response.coupon.CouponResponse;
 import com.onebook.frontapi.dto.coupon.response.coupon.IssuedCouponFeignResponse;
 import com.onebook.frontapi.dto.coupon.response.coupon.IssuedCouponResponse;
@@ -12,7 +13,9 @@ import com.onebook.frontapi.feign.coupon.CouponClient;
 import com.onebook.frontapi.feign.coupon.CouponPolicyClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,7 @@ public class CouponBoxService {
     private final CouponBoxClient couponBoxClient;
     private final CouponClient couponClient;
     private final CouponPolicyService couponPolicyService;
+    private final CouponService couponService;
 
     private final Integer PAGE_SIZE = 10;
 
@@ -134,6 +138,16 @@ public class CouponBoxService {
 
     }
 
+    public IssuedCouponResponse issueCouponToMember(){
 
+        // 쿠폰 번호가 필요함 (정책id로 해당하는 쿠폰들 쫙 받아온다음에, 그중에 하나 랜덤으로 사용자에게 발급)
+
+        // 정률정책이면, 정액정책이면...
+
+        String couponNumber;
+        IssueCouponToMemberRequest issueCouponToMemberRequest = new IssueCouponToMemberRequest("{couponNumber}");
+
+        return couponBoxClient.issueCouponToMember(issueCouponToMemberRequest).getBody();
+    }
 
 }
